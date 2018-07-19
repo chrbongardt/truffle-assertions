@@ -53,6 +53,17 @@ getPrettyEmittedEventsString = (result) => {
   return string;
 }
 
+
+exceptionRaised = async(promise)=>{
+    try{
+        await promise 
+    }catch(e){
+        return
+    }
+    assert(false, "No exception was raised")
+}
+
+
 module.exports = {
   eventEmitted: (result, eventType, filter, message) => {
     /* Filter correct event types */
@@ -93,6 +104,7 @@ module.exports = {
     eventArgs = _.filter(eventArgs, filter);
     assertEventListEmpty(eventArgs, message, `Event filter for ${eventType} returned results\n${getPrettyEmittedEventsString(result)}`);
   },
+  exceptionRaised: exceptionRaised,
   prettyPrintEmittedEvents: (result) => {
     console.log(getPrettyEmittedEventsString(result));
   }
